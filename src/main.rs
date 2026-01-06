@@ -55,6 +55,26 @@ impl SearchProviderImpl for Application {
     }
 }
 
+fn should_filter(id: u32) -> bool {
+     [
+        1113280, // Proton 4.11
+        1420170, // Proton 5.13
+        1580130, // Proton 6.3
+        1887720, // Proton 7.0
+        2348590, // Proton 8.0
+        2805730, // Proton 9.0
+        3658110, // Proton 10.0
+        1826330, // Proton EasyAntiCheat Runtime
+        1493710, // Proton Experimental
+        2180100, // Proton Hotfix
+        1070560, // Steam Linux Runtime 1.0 (scout)
+        1391110, // Steam Linux Runtime 2.0 (soldier)
+        1628350, // Steam Linux Runtime 3.0 (sniper)
+        228980,  // Steamworks Common Redistributables
+    ]
+    .contains(&id)
+}
+
 fn get_games() -> Result<GameResults> {
     let mut results = GameResults::new();
     let steam = SteamDir::locate()?;
@@ -67,7 +87,9 @@ fn get_games() -> Result<GameResults> {
                     match app {
                         Err(err) => error!("failed reading app: {err}"),
                         Ok(app) => {
-                            results.insert(app.app_id.to_string(), app.name.unwrap());
+                            if !should_filter(app.app_id){
+                                results.insert(app.app_id.to_string(), app.name.unwrap());
+                            }
                         }
                     }
                 }

@@ -56,7 +56,7 @@ impl SearchProviderImpl for Application {
 }
 
 fn should_filter(id: u32) -> bool {
-     [
+    [
         1113280, // Proton 4.11
         1420170, // Proton 5.13
         1580130, // Proton 6.3
@@ -87,7 +87,7 @@ fn get_games() -> Result<GameResults> {
                     match app {
                         Err(err) => error!("failed reading app: {err}"),
                         Ok(app) => {
-                            if !should_filter(app.app_id){
+                            if !should_filter(app.app_id) {
                                 results.insert(app.app_id.to_string(), app.name.unwrap());
                             }
                         }

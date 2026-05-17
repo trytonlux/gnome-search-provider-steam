@@ -70,6 +70,7 @@ fn should_filter(id: u32) -> bool {
         1070560, // Steam Linux Runtime 1.0 (scout)
         1391110, // Steam Linux Runtime 2.0 (soldier)
         1628350, // Steam Linux Runtime 3.0 (sniper)
+        4183110, // Steam Linux Runtime 4.0
         228980,  // Steamworks Common Redistributables
     ]
     .contains(&id)
